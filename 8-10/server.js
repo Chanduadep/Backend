@@ -1,13 +1,11 @@
-const myHttp = require("http");
-
-const server = myHttp.createServer((req, res) => {
-  if (req.method == "GET" && req.url == "/hey") {
-    res.end("Hello.");
-  } else {
-    res.end("Different url.");
-  }
+const express=require("express");
+const app=express();
+app.get("/",(req,res)=>{
+    res.send("Home Page");
 });
-
-server.listen(8000, () => {
-  console.log("server running on port 8000.");
+app.get("/register",(req,res)=>{
+    res.send("Register Page");
+});
+app.listen(8000,()=>{
+    console.log("server is running on port 8000");
 });
