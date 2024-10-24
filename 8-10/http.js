@@ -2,9 +2,9 @@ const myHttp = require("http");
 
 const server = myHttp.createServer((req, res) => {
   if (req.method == "GET" && req.url == "/hey") {
-    res.end("Hello.");
+     return res.end("Hello.");
   } else {
-    res.end("Different url.");
+    return res.end("Different url.");
   }
 });
 
