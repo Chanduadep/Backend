@@ -3,8 +3,12 @@ import express from "express";
 import allRoutes from './routes/index.js';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import cors from 'cors';
+import cookieParser from "cookie-parser";
 const app=express();
+app.use(cookieParser())
 app.use(express.json());
+app.use(cors({origin:"http://localhost:3000",credentials:true}));
 dotenv.config();
 
 app.get("/",(req,res)=>{
