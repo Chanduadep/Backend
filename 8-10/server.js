@@ -17,6 +17,7 @@ app.get("/",(req,res)=>{
 
 app.use("/api/v1/", allRoutes)
 
+
 mongoose.connect(process.env.MONGODBURL).then(()=>{
     console.log("mongoDb is connected")
 })

@@ -27,7 +27,7 @@ export const Login = async (req, res) => {
     return res.json({
       message: "Login successful",
       success: true,
-      userData: { email: isEmailExits.email, name: isEmailExits.userName },
+      userData: { email: isEmailExits.email, name: isEmailExits.userName ,userId:isEmailExits._id,},
 
     });
   }
@@ -72,3 +72,24 @@ export const Register = async (req, res) => {
     res.json({ message: error, success: false });
   }
 };
+
+export const getCurrentUSer = async (req, res) => {
+  try {
+    console.log(req.cookies, "reqcookies")
+    const token = req.cookies.token;
+    if (!token) return res.status(400).json({ success: false })
+    const tokenData = jwt.verify(token, process.env.ENCRYPTIONSECRET)
+    console.log(tokenData, "tokendata")
+    const isUserExist = await User.findById(tokenData.userId)
+    if (!isUserExist) return res.status(400).json({ success: false })
+    return res.status(200).json({
+      success: true,
+      userData: { email: isUserExist.email, name: isUserExist.userName,userId:isUserExist._id, }
+    })
+    console.log(isUserExist, "isUserExist")
+
+
+  } catch (error) {
+    res.json({ message: error, success: false });
+  }
+}
