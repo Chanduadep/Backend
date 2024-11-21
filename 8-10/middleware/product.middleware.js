@@ -2,7 +2,7 @@ import User from "../models/user.schema.js";
 
 export const checkIsUserValid=async (req,res,next)=>{
     try{
-        const {userId}=res.body;
+        const {userId}=req.body;
         if(!userId){
             return res.status(404).json({success:false,message:"user Id is required"}) 
         }
